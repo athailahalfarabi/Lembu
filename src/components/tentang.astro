@@ -1,0 +1,63 @@
+---
+// src/components/Tentang.astro
+const features = [
+  {
+    num: '01',
+    title: 'Potong Custom',
+    desc: 'Dadu, fillet, slice tipis, boneless, atau karkas utuh. Kami potong sesuai kebutuhan dapur Anda tanpa biaya ekstra.',
+  },
+  {
+    num: '02',
+    title: 'Tidak Ada Stok Beku',
+    desc: 'Habis artinya benar-benar habis. Semua dipotong pagi itu juga. Tidak ada yang masuk freezer.',
+  },
+  {
+    num: '03',
+    title: 'Antar Subuh',
+    desc: 'Gratis ongkir area Meteseh min. 5kg. Pengiriman subuh tersedia untuk kebutuhan katering pagi.',
+  },
+  {
+    num: '04',
+    title: 'Paket Aqiqah & Kurban',
+    desc: 'Paket lengkap: hewan, penyembelihan, distribusi. Hubungi kami untuk penawaran terbaik.',
+  },
+];
+---
+<section id="tentang">
+  <!-- Background dekoratif -->
+  <div class="about-bg">
+    <div class="about-bg-word">DAGING</div>
+  </div>
+
+  <div class="about-grid">
+    <!-- Kiri: judul & deskripsi -->
+    <div class="about-left">
+      <p class="section-label"> — Tentang Kami</p>
+      <h2 class="about-title">
+        Bukan<br/>
+        Sembarang<br/>
+        <em>Jagal</em>
+      </h2>
+      <div class="about-line"></div>
+      <p class="about-body">
+        Sejak 2026, kami melayani rumah tangga, warung makan, katering, dan restoran
+        di Semarang. Setiap ekor dipilih langsung dari peternak lokal. Pemotongan
+        mengikuti standar halal MUI dan sanitasi ketat — karena daging yang baik
+        dimulai dari cara potong yang benar.
+      </p>
+    </div>
+
+    <!-- Kanan: feature list -->
+    <div class="about-right">
+      {features.map((f) => (
+        <div class="feat-row">
+          <div class="feat-num">{f.num}</div>
+          <div>
+            <div class="feat-title">{f.title}</div>
+            <div class="feat-desc">{f.desc}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

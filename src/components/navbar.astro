@@ -1,0 +1,43 @@
+---
+import logo from '../../public/logo.png';
+// src/components/Navbar.astro
+---
+<header class="navbar" id="navbar">
+  <a href="#beranda" class="nav-logo" id="logo-top">
+     <div class ="nav-logo-img">
+   <img src={logo.src} alt="logo lembu lemu"></div>
+    <div class="nav-logo-text">LEMBU<span></span> LEMU</div>
+  </a>
+
+  <!-- Nav links desktop -->
+  <nav class="nav-links" id="nav-links" aria-label="Menu utama">
+    <a href="#beranda"  class="nav-link active">Beranda</a>
+    <a href="#tentang"  class="nav-link">Tentang</a>
+    <a href="#produk"   class="nav-link">Produk</a>
+    <a href="#layanan"  class="nav-link">Layanan</a>
+    <a href="#kontak"   class="nav-link">Kontak</a>
+  </nav>
+
+  <div class="nav-right">
+    <button class="cart-btn" id="cart-open-btn" aria-label="Buka keranjang">
+  <svg class="cart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="9" cy="21" r="1"></circle>
+    <circle cx="20" cy="21" r="1"></circle>
+    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+  </svg>
+  <span class="cart-count" id="cart-count">0</span>
+</button>
+    <button class="hamburger" id="hamburger-btn" aria-label="Buka menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile nav drawer -->
+<nav class="mobile-nav" id="mobile-nav" aria-label="Menu mobile">
+  <a href="#beranda"  class="nav-link">Beranda</a>
+  <a href="#tentang"  class="nav-link">Tentang</a>
+  <a href="#produk"   class="nav-link">Produk</a>
+  <a href="#layanan"  class="nav-link">Layanan</a>
+  <a href="#kontak"   class="nav-link">Kontak</a>
+</nav>

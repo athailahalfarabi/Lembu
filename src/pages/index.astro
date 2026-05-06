@@ -1,17 +1,49 @@
 ---
-
+// src/pages/index.astro
+import Layout    from '../layouts/layout.astro';
+import TopBar    from '../components/topBar.astro';
+import Navbar    from '../components/navbar.astro';
+import Hero      from '../components/hero.astro';
+import Tentang   from '../components/tentang.astro';
+import Produk    from '../components/produk.astro';
+import Layanan   from '../components/layanan.astro';
+import PreFooter from '../components/preFooter.astro';
+import Footer    from '../components/footer.astro';
+import Cart      from '../components/cart.astro';
+import '../styles/global.css';
 ---
+<Layout>
+  <!-- ① Info bar paling atas -->
+  <TopBar />
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+  <!-- ② Sticky navbar -->
+  <Navbar />
+
+  <!-- ③ Halaman utama -->
+  <main>
+    <Hero />
+    <Tentang />
+    <Produk />
+    <Layanan />
+  </main>
+
+  <!-- ④ Sebelum footer: social | logo besar | subscribe -->
+  <PreFooter />
+
+  <!-- ⑤ Footer + form kontak -->
+  <Footer />
+
+  <!-- ⑥ Keranjang belanja (overlay + sidebar) -->
+  <Cart />
+
+  <!-- ⑦ Tombol kembali ke atas -->
+  <button class="back-top" id="back-top" aria-label="Kembali ke atas">
+    <svg viewBox="0 0 24 24">
+      <polyline points="18 15 12 9 6 15"
+        fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>
+  </button>
+
+  <!-- ⑧ Semua JavaScript -->
+  <script src="../scripts/main.js"></script>
+</Layout>

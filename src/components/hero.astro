@@ -1,0 +1,52 @@
+---
+// src/components/Hero.astro
+// Untuk gambar nyata: import dagingImg from '../assets/daging.png';
+import dagingImg from '../../public/daging.png';
+import halalImg from '../../public/halal.png';
+---
+<section id="beranda">
+  <div class="hero-line-v"></div>
+
+  <!-- Teks kiri bawah -->
+  <div class="hero-text">
+    <p class="hero-eyebrow">Semarang, Jawa Tengah — Est. 2026</p>
+    <h1 class="hero-h1">
+      DAGING<br/>
+      <span class="outline">SEGAR</span>
+      <span class="red">EXPRESS</span>
+    </h1>
+    <p class="hero-sub">
+      Pemotongan kambing &amp; sapi pilihan, halal bersertifikat,
+      langsung dari tangan ahlinya.
+    </p>
+    <div class="hero-cta">
+      <a href="#produk"                                   class="btn-red">Lihat Menu</a>
+      <a href="https://wa.me/6282261401619" target="_blank"
+         rel="noopener"                                   class="btn-ghost">Tanya via WA</a>
+    </div>
+  </div>
+
+  <!-- 3D Rotating Meat -->
+  <div class="hero-3d-wrap">
+    <div class="hero-3d-inner">
+      <img src={dagingImg.src} alt="Daging Segar" class="hero-meat-img" />
+    </div>
+  </div>
+
+  <!-- Stats kanan bawah -->
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-n">
+      <img src={halalImg.src} alt="Halal Logo" class="halal-logo"/>
+    </div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-n">0</div>
+      <div class="hero-stat-l">Stok Kemarin</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-n">15+</div>
+      <div class="hero-stat-l">Pengalaman</div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,127 @@
+---
+import pahak from '../../public/pahak.png';
+import igak from '../../public/igak.png';
+import jeroank from '../../public/jeroank.png';
+import kambing from '../../public/kambing.png';
+
+import pahas from '../../public/pahas.png';
+import igas from '../../public/igas.png';
+import jeroans from '../../public/jeroans.png';
+import daginss from '../../public/daginss.png';
+import dagingsh from '../../public/dagingsh.png';
+import giling from '../../public/giling.png';
+
+// src/components/Produk.astro
+const menuKambing = [
+  { id:'k1', img:'/kambing.png', name:'Karkas Kambing Utuh',   cut:'Per ekor / Per kilogram',   price:130000, unit:'Halal MUI', weights:['0.5kg','1kg','2kg','5kg'], defaultW:1 },
+  { id:'k2', img:'/pahak.png', name:'Paha Kambing',     cut:'Potongan Paha Belakang',    price:145000, unit:'Segar',     weights:['0.5kg','1kg','2kg'],       defaultW:1 },
+  { id:'k3', img:'/igak.png', name:'Iga Kambing',        cut:'Iga + Daging Melekat',      price:115000, unit:'Segar',     weights:['0.5kg','1kg','2kg'],       defaultW:1 },
+  { id:'k4', img:'/jeroank.png', name:'Jeroan Kambing',  cut:'Hati, Paru, Usus, Babat',   price:65000,  unit:'Halal',    weights:['0.5kg','1kg'],             defaultW:1 },
+];
+
+const menuSapi = [
+  { id:'s1', img:'/pahas.png', name:'Paha Sapi',         cut:'Fillet',       price:165000, unit:'Premium',  weights:['0.5kg','1kg','2kg'],       defaultW:1 },
+  { id:'s2', img: '/daginss.png', name:'Sengkel Sapi',           cut:'Shank / Betis Bawah',       price:110000, unit:'Halal',    weights:['0.5kg','1kg','2kg','5kg'], defaultW:1 },
+  { id:'s3', img:'/dagingsh.png', name:'Sandung Lamur',          cut:'Brisket / Dada Bawah',      price:120000, unit:'Segar',    weights:['0.5kg','1kg','2kg'],       defaultW:1 },
+  { id:'s4', img:'/igas.png', name:'Tulang Sapi',            cut:'Tulang Muda + Sumsum',      price:35000,  unit:'Segar',    weights:['1kg','2kg','5kg'],         defaultW:1 },
+  { id:'s5', img:'/jeroans.png', name:'Jeroan Sapi Lengkap',   cut:'Babat, Iso, Paru, Kikil',   price:55000,  unit:'Halal',    weights:['0.5kg','1kg','2kg'],       defaultW:1 },
+  { id:'s6', img: '/giling.png', name:'Daging Giling Sapi',    cut:'Ground Beef 80/20',         price:95000,  unit:'Fresh',    weights:['0.5kg','1kg','2kg'],       defaultW:1 },
+];
+---
+<section id="produk">
+  <!-- Header -->
+  <div class="produk-header">
+    <div class="produk-title-wrap">
+      <span class="produk-overline">— Menu &amp; Harga</span>
+      <h2 class="produk-title">
+        MENU KAMI
+      </h2>
+    </div>
+    <p class="produk-subtitle">Semua dipotong pagi ini, tidak ada yang kemarin</p>
+  </div>
+
+  <!-- Category Tabs -->
+  <div class="cat-tabs" role="tablist">
+    <button class="cat-tab active" data-cat="kambing" role="tab"> Kambing</button>
+    <button class="cat-tab"        data-cat="sapi"    role="tab"> Sapi</button>
+    <button class="cat-tab"        data-cat="all"     role="tab"> Semua</button>
+  </div>
+
+  <!-- Menu Grid -->
+  <div class="menu-grid" id="menu-grid">
+
+    {menuKambing.map((item) => (
+      <div class="menu-card" data-cat="kambing">
+        <div class="menu-card-img-wrap">
+          
+            
+            <img src={item.img} alt={item.name} />
+            
+         
+          
+          <span class="price-tag">
+            Rp {item.price.toLocaleString('id-ID')}/kg
+          </span>
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-card-name">{item.name}</div>
+          <div class="menu-card-cut">{item.cut}</div>
+          <div class="chips" data-iid={item.id}>
+            {item.weights.map((w, i) => (
+              <button class={`chip${i === item.defaultW ? ' sel' : ''}`} data-w={w}>
+                {w}
+              </button>
+            ))}
+          </div>
+          <div class="menu-card-footer">
+            <div class="menu-card-unit">/kg · {item.unit}</div>
+            <button
+              class="add-btn"
+              data-id={item.id}
+              data-name={item.name}
+              data-price={item.price}
+              data-img={item.img}
+            >
+              + Tambah
+            </button>
+          </div>
+        </div>
+      </div>
+    ))}
+
+    {menuSapi.map((item) => (
+      <div class="menu-card" data-cat="sapi" style="display:none">
+        <div class="menu-card-img-wrap">
+          <img src={item.img} alt={item.name} />
+          <span class="price-tag">
+            Rp {item.price.toLocaleString('id-ID')}/kg
+          </span>
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-card-name">{item.name}</div>
+          <div class="menu-card-cut">{item.cut}</div>
+          <div class="chips" data-iid={item.id}>
+            {item.weights.map((w, i) => (
+              <button class={`chip${i === item.defaultW ? ' sel' : ''}`} data-w={w}>
+                {w}
+              </button>
+            ))}
+          </div>
+          <div class="menu-card-footer">
+            <div class="menu-card-unit">/kg · {item.unit}</div>
+            <button
+              class="add-btn"
+              data-id={item.id}
+              data-name={item.name}
+              data-price={item.price}
+              data-img={item.img}
+            >
+              + Tambah
+            </button>
+          </div>
+        </div>
+      </div>
+    ))}
+
+  </div>
+</section>

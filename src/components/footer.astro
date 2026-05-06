@@ -1,0 +1,99 @@
+---
+// src/components/Footer.astro
+const WA = '6285174440515';
+---
+<footer id="kontak">
+  <div class="footer-grid">
+
+    <!-- Form komentar -->
+    <div class="footer-comment">
+      <span class="footer-label">Hubungi Kami</span>
+      <h3 class="footer-h">Kirim Pesan<br/>atau Komentar</h3>
+      <form class="comment-form" id="comment-form" novalidate>
+        <input  type="text"  class="comment-input"    id="comment-name"    placeholder="Nama Anda"   required />
+        <input  type="email" class="comment-input"    id="comment-email"   placeholder="Email Anda"  required />
+        <textarea            class="comment-textarea" id="comment-message" placeholder="Tulis pesan, pertanyaan, atau komentar Anda..." rows="4" required></textarea>
+        <button type="submit" class="comment-btn">Kirim Pesan →</button>
+      </form>
+    </div>
+
+    <!-- Informasi kontak -->
+    <div>
+      <span class="footer-col-title">Informasi Kontak</span>
+
+      <div class="footer-info-item">
+        <div class="footer-info-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#8b0000" stroke-width="2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+        </div>
+        <div class="footer-info-text">
+          Desa Balerejo, RT 1, RW 1<br/>
+          Kecamatan Tlogomulyo<br/>
+          Kabupaten Temanggung, Jawa Tengah 50274
+        </div>
+      </div>
+
+      <div class="footer-info-item">
+        <div class="footer-info-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#8b0000" stroke-width="2">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.13 6.13l.95-.96a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+        </div>
+        <div class="footer-info-text">
+          <a href="tel:+6285174440515">+62 851-7444-0515</a>
+        </div>
+      </div>
+
+      <div class="footer-info-item">
+        <div class="footer-info-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#8b0000" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,12 2,6"/>
+          </svg>
+        </div>
+        <div class="footer-info-text">
+          <a href="mailto:akbaralfarizi886@gmail.com">akbaralfarizi886@gmail.com</a>
+        </div>
+      </div>
+
+      <a href={`https://wa.me/${WA}`} target="_blank" rel="noopener" class="wa-btn-footer">
+  <span class="wa-icon">
+    <svg viewBox="0 0 24 24">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.2 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.086 1.758-.718 2.006-1.412.248-.694.248-1.29.173-1.412-.074-.124-.272-.198-.57-.347z"/>
+    </svg>
+  </span>
+  <span class="wa-text">Chat via WhatsApp</span>
+</a>
+    </div>
+
+    <!-- Jam operasional -->
+    <div>
+      <span class="footer-col-title">Jam Operasional</span>
+      <div class="footer-info-item">
+        <div class="footer-info-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#8b0000" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <div class="footer-info-text">
+          Senin – Sabtu<br/>
+          04.00 – 11.00 WIB<br/><br/>
+          Minggu: Tutup<br/>
+          Hari Besar: Konfirmasi WA
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="footer-bottom">
+    <div class="footer-brand-small">LEMBU LEMU</div>
+    <div class="footer-copy">
+      © 2026 Lembu Lemu · Halal · Segar · Terpercaya · Kecamatan Tlogomulyo Kabupaten Temanggung
+    </div>
+  </div>
+</footer>
