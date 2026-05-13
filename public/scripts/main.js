@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.body.classList.add('page-loaded');
 
 /* ════════════════════════════════════════
-   NAVBAR — hide saat scroll naik, tampil saat scroll turun
+   NAVBAR — tampil saat scroll ke bawah, hide saat scroll ke atas
 ════════════════════════════════════════════════ */
 let lastScrollY = 0;
 const navbar = document.getElementById('navbar');

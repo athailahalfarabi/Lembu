@@ -44,6 +44,9 @@ body.page-loaded {
 ::-webkit-scrollbar-thumb:hover { background: var(--bone); }
 ::-webkit-scrollbar-corner { background: var(--ink); }
 
+/* Remove tap highlight on mobile */
+* { -webkit-tap-highlight-color: transparent; }
+
 /* ════════════════════════════════════════
    TOP BAR
 ════════════════════════════════════════ */
@@ -98,7 +101,7 @@ body.page-loaded {
    NAVBAR
 ════════════════════════════════════════ */
 .navbar {
-  background: var(--bone);
+  background: var(--white);
   height: 100px;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 2.5rem;
@@ -1579,9 +1582,41 @@ body.page-loaded {
    RESPONSIVE — MOBILE (≤ 768px)
 ════════════════════════════════════════ */
 @media (max-width: 768px) {
-  .topbar { padding: 0.4rem 2rem;  }
-  .topbar-left { gap: 0.75rem;  }
-  .topbar-item { font-size: 0.5rem; letter-spacing: 0rem;}
+  .topbar {
+    padding: 0.4rem 1rem;
+    flex-wrap: nowrap;
+    overflow: hidden;
+  }
+  .topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: nowrap;
+    min-width: 0;
+    overflow: hidden;
+  }
+  .topbar-left .topbar-item {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 100%;
+  }
+  .topbar-item {
+    font-size: 0.45rem;
+    letter-spacing: 0rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .topbar-item svg { flex-shrink: 0; }
+  .topbar-social {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
   .nav-logo-img {
     width: 38px; /* Lebih kecil sedikit untuk mobile */
     height: 38px;
@@ -1596,6 +1631,7 @@ body.page-loaded {
   gap: 2rem;               /* Beri jarak lebih lega antar elemen */
   padding: 5rem 1.5rem; 
 }
+
 
 /* Background halus */
 #beranda::before {
@@ -1684,14 +1720,32 @@ body.page-loaded {
   .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
   .footer-bottom { flex-direction: column; text-align: center; }
   .cart-sidebar { width: 100vw; border-left: none; }
-}
-
+  }
 /* ════════════════════════════════════════
    RESPONSIVE — MOBILE KECIL (≤ 480px)
 ════════════════════════════════════════ */
 @media (max-width: 480px) {
+  .topbar {
+    padding: 0.35rem 1rem;
+    flex-wrap: nowrap;
+    overflow: hidden;
+  }
+  .topbar-left {
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    min-width: 0;
+    overflow: hidden;
+  }
   .topbar-left .topbar-item:not(:first-child) { display: none; }
-  .topbar { padding: 0.35rem 1rem; }
+  .topbar-item {
+    font-size: 0.42rem;
+    letter-spacing: 0rem;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .topbar-social { flex-shrink: 0; }
   .navbar { padding: 0 1rem; height: 52px; }
   .nav-logo-text { font-size: 1.2rem; }
   #beranda { padding: 2rem 0 4rem; }
