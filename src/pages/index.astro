@@ -4,6 +4,7 @@ import Layout    from '../layouts/layout.astro';
 import TopBar    from '../components/topBar.astro';
 import Navbar    from '../components/navbar.astro';
 import Hero      from '../components/hero.astro';
+import Gallery   from '../components/gallery.astro';
 import Tentang   from '../components/tentang.astro';
 import Produk    from '../components/produk.astro';
 import Layanan   from '../components/layanan.astro';
@@ -22,6 +23,7 @@ import '../styles/global.css';
   <!-- ③ Halaman utama -->
   <main>
     <Hero />
+    <Gallery />
     <Tentang />
     <Produk />
     <Layanan />
@@ -45,5 +47,5 @@ import '../styles/global.css';
   </button>
 
   <!-- ⑧ Semua JavaScript -->
-  <script src="../scripts/main.js"></script>
+  <script src="/scripts/main.js" defer></script>
 </Layout>

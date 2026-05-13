@@ -1,9 +1,10 @@
 // src/scripts/main.js
 // Semua logic JavaScript: navbar, hamburger, cart, tabs, chips, scroll
 
-const WA = '6285174440515';
+const WA = '6282261401619';
 
 document.addEventListener('DOMContentLoaded', () => {
+  document.body.classList.add('page-loaded');
 
 /* ════════════════════════════════════════
    NAVBAR — hide saat scroll naik, tampil saat scroll turun
@@ -24,7 +25,7 @@ window.addEventListener('scroll', () => {
 
 /* ════════════════════════════════════════
    HAMBURGER — mobile nav toggle
-════════════════════════════════════════ */
+════════════════════════════════════════════════ */
 const hamburger = document.getElementById('hamburger-btn');
 const mobileNav = document.getElementById('mobile-nav');
 
@@ -46,7 +47,7 @@ mobileNav.querySelectorAll('.nav-link').forEach(link => {
 
 /* ════════════════════════════════════════
    LOGO — klik smooth scroll ke atas
-════════════════════════════════════════ */
+════════════════════════════════════════════════ */
 document.getElementById('logo-top').addEventListener('click', (e) => {
   e.preventDefault();
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -55,7 +56,7 @@ document.getElementById('logo-top').addEventListener('click', (e) => {
 
 /* ════════════════════════════════════════
    ACTIVE NAV LINK — IntersectionObserver
-════════════════════════════════════════ */
+════════════════════════════════════════════════ */
 const navLinks    = document.querySelectorAll('.nav-link');
 const sectionIds  = ['beranda', 'tentang', 'produk', 'layanan', 'kontak'];
 
@@ -80,7 +81,7 @@ sectionIds.forEach(id => {
 
 /* ════════════════════════════════════════
    BACK TO TOP
-════════════════════════════════════════ */
+════════════════════════════════════════════════ */
 const backTop = document.getElementById('back-top');
 
 window.addEventListener('scroll', () => {
@@ -94,7 +95,7 @@ backTop.addEventListener('click', () => {
 
 /* ════════════════════════════════════════
    WEIGHT CHIPS
-════════════════════════════════════════ */
+════════════════════════════════════════════════ */
 const selectedWeights = {};
 
 document.querySelectorAll('.chips').forEach(group => {
@@ -123,7 +124,7 @@ document.querySelectorAll('.chips').forEach(group => {
 
 /* ════════════════════════════════════════
    CATEGORY TABS
-════════════════════════════════════════ */
+════════════════════════════════════════════════ */
 document.querySelectorAll('.cat-tab').forEach(tab => {
   tab.addEventListener('click', () => {
     document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
@@ -137,20 +138,18 @@ document.querySelectorAll('.cat-tab').forEach(tab => {
 });
 
 // Initialize active tab on page load
-document.addEventListener('DOMContentLoaded', () => {
-  const activeTab = document.querySelector('.cat-tab.active');
-  if (activeTab) {
-    const cat = activeTab.dataset.cat;
-    document.querySelectorAll('.menu-card').forEach(card => {
-      card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none';
-    });
-  }
-});
+const activeTab = document.querySelector('.cat-tab.active');
+if (activeTab) {
+  const cat = activeTab.dataset.cat;
+  document.querySelectorAll('.menu-card').forEach(card => {
+    card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none';
+  });
+}
 
 
 /* ════════════════════════════════════════
    CART — state, render, open/close
-════════════════════════════════════════ */
+════════════════════════════════════════════════ */
 let cart = [];
 
 const fmt = (n) => 'Rp ' + n.toLocaleString('id-ID');
@@ -286,7 +285,7 @@ document.getElementById('checkout-btn').addEventListener('click', () => {
 
 /* ════════════════════════════════════════
    SUBSCRIBE FORM
-════════════════════════════════════════ */
+════════════════════════════════════════════════ */
 const subscribeBtn = document.getElementById('subscribe-btn');
 if (subscribeBtn) {
   subscribeBtn.addEventListener('click', () => {
@@ -300,7 +299,7 @@ if (subscribeBtn) {
 
 /* ════════════════════════════════════════
    COMMENT FORM
-════════════════════════════════════════ */
+════════════════════════════════════════════════ */
 const commentForm = document.getElementById('comment-form');
 if (commentForm) {
   commentForm.addEventListener('submit', (e) => {

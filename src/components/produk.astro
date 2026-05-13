@@ -37,14 +37,14 @@ const menuSapi = [
         MENU KAMI
       </h2>
     </div>
-    <p class="produk-subtitle">Semua dipotong pagi ini, tidak ada yang kemarin</p>
+    <p class="produk-subtitle">Semua dipotong segar</p>
   </div>
 
   <!-- Category Tabs -->
   <div class="cat-tabs" role="tablist">
-    <button class="cat-tab active" data-cat="kambing" role="tab"> Kambing</button>
+     <button class="cat-tab active" data-cat="all"     role="tab"> Semua</button>
     <button class="cat-tab"        data-cat="sapi"    role="tab"> Sapi</button>
-    <button class="cat-tab"        data-cat="all"     role="tab"> Semua</button>
+     <button class="cat-tab"        data-cat="kambing" role="tab"> Kambing</button>
   </div>
 
   <!-- Menu Grid -->
@@ -90,7 +90,7 @@ const menuSapi = [
     ))}
 
     {menuSapi.map((item) => (
-      <div class="menu-card" data-cat="sapi" style="display:none">
+      <div class="menu-card" data-cat="sapi">
         <div class="menu-card-img-wrap">
           <img src={item.img} alt={item.name} />
           <span class="price-tag">
