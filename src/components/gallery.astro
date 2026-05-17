@@ -1,148 +1,138 @@
 ---
 // src/components/gallery.astro
-// Galeri media (foto dan video) di antara hero dan tentang
 ---
 
 <section id="galeri" class="gallery-section">
-  <div class="gallery-container">
-    <!-- Header -->
-    <div class="gallery-header">
-      <p class="section-label">— Galeri Kami</p>
-      <h2 class="gallery-title">Lihat Proses & Produk Kami</h2>
+  
+  <!-- Header -->
+  <div class="gallery-header">
+    <div class="gallery-header-left">
+      <span class="gallery-overline">
+        <span class="gallery-overline-line"></span>
+        Galeri Kami
+      </span>
+      <h2 class="gallery-title">Lihat Proses<br />&amp; Produk Kami</h2>
+    </div>
+    <p class="gallery-subtitle">
+      Setiap potongan mencerminkan<br />standar kualitas terbaik kami.
+    </p>
+  </div>
+
+  <!-- Desktop: Bento Grid -->
+  <div class="gallery-bento" aria-label="Galeri foto dan video">
+
+    <!-- 1. VIDEO besar (col 1, span 2 rows) -->
+    <div class="gallery-cell gallery-cell--feature" data-type="video">
+      <div class="gallery-media">
+        <div class="youtube-lite" data-id="WrOzwoMKzH4" aria-label="Video: Proses Produksi Daging Segar"></div>
+      </div>
+      <div class="gallery-badge">
+        <span class="gallery-badge-dot"></span>
+        Video
+      </div>
+      <div class="gallery-caption">
+        <span class="gallery-cap-label">01 / Proses Produksi</span>
+      </div>
     </div>
 
-    <!-- Grid galeri -->
-    <div class="gallery-wrapper">
-      <button class="gallery-nav gallery-prev" aria-label="Previous">&larr;</button>
-      <div class="gallery-grid">
-        <!-- Item 1: Video -->
-        <div class="gallery-item video">
-          <div class="gallery-media">
-            <iframe 
-              width="100%" 
-              height="100%" 
-              src="https://www.youtube.com/embed/WrOzwoMKzH4?si=AyaPnGvI8gd_80lw"
-              title="Video Produksi Daging Segar" 
-              frameborder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-              allowfullscreen>
-            </iframe>
-          </div>
-        </div>
-
-        <!-- Item 2: Foto -->
-        <div class="gallery-item photo">
-          <div class="gallery-media">
-            <img 
-              src="/kualtitas.jpg" 
-              alt="Daging Segar Berkualitas" 
-              loading="lazy"
-            />
-          </div>
-        </div>
-
-        <!-- Item 3: Foto -->
-        <div class="gallery-item photo">
-          <div class="gallery-media">
-            <img 
-              src="/pemotongan.jpg" 
-              alt="Proses Pemotongan Daging" 
-              loading="lazy"
-            />
-          </div>
-        </div>
-
-        <!-- Item 4: Video -->
-        <div class="gallery-item video">
-          <div class="gallery-media">
-            <iframe 
-              width="100%" 
-              height="100%" 
-              src="https://www.youtube.com/embed/jLjP9xVJx-8?si=h7wIh03BcHm1OU_Q"  
-              title="Video Sertifikasi Halal" 
-              frameborder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-              allowfullscreen>
-            </iframe>
-          </div>
-        </div>
-
-        <!-- Item 5: Foto -->
-        <div class="gallery-item photo">
-          <div class="gallery-media">
-            <img 
-              src="/kemasan.jpg" 
-              alt="Kemasan Produk Daging" 
-              loading="lazy"
-            />
-          </div>
-        </div>
-
-        <!-- Item 6: Foto -->
-        <div class="gallery-item photo">
-          <div class="gallery-media">
-            <img 
-              src="/tim.jpg" 
-              alt="Tim Lembu Lemu" 
-              loading="lazy"
-            />
-          </div>
-        </div>
+    <!-- 2. Foto (col 2, row 1) -->
+    <div class="gallery-cell" data-type="photo">
+      <div class="gallery-media">
+        <img src="/kualtitas.jpg" alt="Daging Segar Berkualitas" loading="lazy" />
       </div>
-      <button class="gallery-nav gallery-next" aria-label="Next">&rarr;</button>
+      <div class="gallery-overlay">
+        <span class="gallery-cap-label">02 / Kualitas Premium</span>
+      </div>
+    </div>
+
+    <!-- 3. Foto (col 3, row 1) -->
+    <div class="gallery-cell" data-type="photo">
+      <div class="gallery-media">
+        <img src="/pemotongan.jpg" alt="Proses Pemotongan" loading="lazy" />
+      </div>
+      <div class="gallery-overlay">
+        <span class="gallery-cap-label">03 / Proses Pemotongan</span>
+      </div>
+    </div>
+
+    <!-- 4. VIDEO (col 2, row 2) -->
+    <div class="gallery-cell" data-type="video">
+      <div class="gallery-media">
+        <div class="youtube-lite" data-id="jLjP9xVJx-8" aria-label="Video: Sertifikasi Halal"></div>
+      </div>
+      <div class="gallery-badge">
+        <span class="gallery-badge-dot"></span>
+        Video
+      </div>
+      <div class="gallery-caption">
+        <span class="gallery-cap-label">04 / Sertifikasi Halal</span>
+      </div>
+    </div>
+
+    <!-- 5. Foto (col 3, row 2) -->
+    <div class="gallery-cell" data-type="photo">
+      <div class="gallery-media">
+        <img src="/kemasan.jpg" alt="Kemasan Produk" loading="lazy" />
+      </div>
+      <div class="gallery-overlay">
+        <span class="gallery-cap-label">05 / Kemasan Produk</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Full-width footer strip (Tim) -->
+  <div class="gallery-strip">
+    <div class="gallery-strip-img-wrap">
+      <img src="/tim.jpg" alt="Tim Lembu Lemu" loading="lazy" />
+    </div>
+    <div class="gallery-strip-content">
+      <span class="gallery-overline" style="justify-content:flex-start">
+        <span class="gallery-overline-line"></span>
+        Tim Kami
+      </span>
+      <p class="gallery-strip-title">Para Ahli yang<br />Berdedikasi</p>
+    </div>
+    <span class="gallery-strip-num">06</span>
+  </div>
+
+  <!-- Mobile: horizontal scroll carousel -->
+  <div class="gallery-mobile inertial-scroll" aria-label="Galeri foto dan video untuk perangkat mobile">
+    <div class="gallery-mobile-track">
+      <div class="gallery-mobile-item">
+        <div class="youtube-lite" data-id="WrOzwoMKzH4" aria-label="Video: Proses Produksi"></div>
+        <span class="gallery-mobile-label">01 / Proses Produksi</span>
+      </div>
+      <div class="gallery-mobile-item">
+        <img src="/kualtitas.jpg" alt="Kualitas Premium" loading="lazy" />
+        <span class="gallery-mobile-label">02 / Kualitas Premium</span>
+      </div>
+      <div class="gallery-mobile-item">
+        <img src="/pemotongan.jpg" alt="Proses Pemotongan" loading="lazy" />
+        <span class="gallery-mobile-label">03 / Proses Pemotongan</span>
+      </div>
+      <div class="gallery-mobile-item">
+        <div class="youtube-lite" data-id="jLjP9xVJx-8" aria-label="Video: Sertifikasi Halal"></div>
+        <span class="gallery-mobile-label">04 / Sertifikasi Halal</span>
+      </div>
+      <div class="gallery-mobile-item">
+        <img src="/kemasan.jpg" alt="Kemasan Produk" loading="lazy" />
+        <span class="gallery-mobile-label">05 / Kemasan Produk</span>
+      </div>
+      <div class="gallery-mobile-item">
+        <img src="/tim.jpg" alt="Tim Kami" loading="lazy" />
+        <span class="gallery-mobile-label">06 / Tim Kami</span>
+      </div>
+    </div>
+    <!-- Dot indicators -->
+    <div class="gallery-dots" role="tablist">
+      <button class="gallery-dot active" aria-label="Slide 1"></button>
+      <button class="gallery-dot" aria-label="Slide 2"></button>
+      <button class="gallery-dot" aria-label="Slide 3"></button>
+      <button class="gallery-dot" aria-label="Slide 4"></button>
+      <button class="gallery-dot" aria-label="Slide 5"></button>
+      <button class="gallery-dot" aria-label="Slide 6"></button>
     </div>
   </div>
+
 </section>
-
-<script is:inline>
-document.addEventListener('DOMContentLoaded', () => {
-  const galleryGrid = document.querySelector('.gallery-grid');
-  const prevBtn = document.querySelector('.gallery-prev');
-  const nextBtn = document.querySelector('.gallery-next');
-  const items = document.querySelectorAll('.gallery-item');
-
-  if (!galleryGrid || !prevBtn || !nextBtn || items.length === 0) return;
-
-  let currentIndex = 0;
-
-  function updateButtons() {
-    prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
-    nextBtn.style.opacity = currentIndex === items.length - 1 ? '0.5' : '1';
-  }
-
-  function scrollToItem(index) {
-    const item = items[index];
-    if (item) {
-      item.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-        inline: 'start'
-      });
-      currentIndex = index;
-      updateButtons();
-    }
-  }
-
-  prevBtn.addEventListener('click', () => {
-    if (currentIndex > 0) {
-      scrollToItem(currentIndex - 1);
-    }
-  });
-
-  nextBtn.addEventListener('click', () => {
-    if (currentIndex < items.length - 1) {
-      scrollToItem(currentIndex + 1);
-    }
-  });
-
-  // Update currentIndex on scroll
-  galleryGrid.addEventListener('scroll', () => {
-    const scrollLeft = galleryGrid.scrollLeft;
-    const itemWidth = items[0].offsetWidth + 24; // 24px gap
-    currentIndex = Math.round(scrollLeft / itemWidth);
-    updateButtons();
-  });
-
-  updateButtons();
-});
-</script>

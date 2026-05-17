@@ -1,26 +1,40 @@
 // src/scripts/main.js
 // Semua logic JavaScript: navbar, hamburger, cart, tabs, chips, scroll
 
-const WA = '6282261401619';
+const WA = '6285174440515';
 
 document.addEventListener('DOMContentLoaded', () => {
-  document.body.classList.add('page-loaded');
+  const splash = document.getElementById('splash-screen');
 
-/* ════════════════════════════════════════
-   NAVBAR — tampil saat scroll ke bawah, hide saat scroll ke atas
-════════════════════════════════════════════════ */
-let lastScrollY = 0;
-const navbar = document.getElementById('navbar');
-
-window.addEventListener('scroll', () => {
-  const y = window.scrollY;
-  if (y < lastScrollY && y > 80) {
-    navbar.classList.add('hide');
+  if (splash) {
+    window.setTimeout(() => {
+      splash.classList.add('hidden');
+      document.body.classList.add('page-loaded');
+    }, 850);
   } else {
-    navbar.classList.remove('hide');
+    document.body.classList.add('page-loaded');
   }
-  lastScrollY = y;
-}, { passive: true });
+
+  /* ════════════════════════════════════════
+     NAVBAR — Tampil saat scroll ke bawah, Hide saat scroll ke atas
+  ════════════════════════════════════════════════ */
+   let lastScrollY = window.scrollY;
+  const navbar = document.getElementById('navbar');
+
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+
+    // Jika scroll ke bawah dan sudah melewati batas 80px -> Munculkan navbar
+    if (y > lastScrollY && y > 80) {
+      navbar.classList.remove('hide');
+    } 
+    // Jika scroll ke atas ATAU kembali ke paling atas -> Sembunyikan navbar
+    else if (y < lastScrollY || y <= 80) {
+      navbar.classList.add('hide');
+    }
+    
+    lastScrollY = y;
+  }, { passive: true });
 
 
 /* ════════════════════════════════════════
@@ -98,19 +112,42 @@ backTop.addEventListener('click', () => {
 ════════════════════════════════════════════════ */
 const selectedWeights = {};
 
+const formatPrice = (value) => {
+  return 'Rp ' + value.toLocaleString('id-ID');
+};
+
 document.querySelectorAll('.chips').forEach(group => {
-  const iid   = group.dataset.iid;
-  const chips = group.querySelectorAll('.chip');
+  const iid    = group.dataset.iid;
+  const chips  = group.querySelectorAll('.chip');
+  const card   = group.closest('.menu-card');
+  const addBtn = card?.querySelector('.add-btn');
+  const priceTag = card?.querySelector('.price-tag');
+  const basePrice = addBtn ? parseInt(addBtn.dataset.price, 10) : 0;
+
+  const updatePriceTag = (chip) => {
+    if (!priceTag || !basePrice) return;
+    const weight = parseFloat(chip.dataset.w) || 1;
+    const total  = basePrice * weight;
+    priceTag.textContent = `${formatPrice(total)} / ${chip.dataset.w}`;
+  };
+
+  const setDefaultAddText = () => {
+    if (!addBtn || !priceTag || !basePrice) return;
+    const selected = group.querySelector('.chip.sel') || chips[1];
+    if (selected) updatePriceTag(selected);
+  };
 
   // Ambil default yang sudah diberi class .sel di HTML
   chips.forEach(chip => {
     if (chip.classList.contains('sel')) {
       selectedWeights[iid] = chip.dataset.w;
+      updatePriceTag(chip);
     }
     chip.addEventListener('click', () => {
       chips.forEach(c => c.classList.remove('sel'));
       chip.classList.add('sel');
       selectedWeights[iid] = chip.dataset.w;
+      updatePriceTag(chip);
     });
   });
 
@@ -118,7 +155,10 @@ document.querySelectorAll('.chips').forEach(group => {
   if (!selectedWeights[iid] && chips.length > 1) {
     selectedWeights[iid] = chips[1].dataset.w;
     chips[1].classList.add('sel');
+    updatePriceTag(chips[1]);
   }
+
+  setDefaultAddText();
 });
 
 
@@ -146,6 +186,23 @@ if (activeTab) {
   });
 }
 
+const galleryTrack = document.querySelector('.gallery-mobile-track');
+if (galleryTrack) {
+  const dots = document.querySelectorAll('.gallery-dot');
+  
+  // Simple scroll listener untuk dots
+  galleryTrack.addEventListener('scroll', () => {
+    const idx = Math.round(galleryTrack.scrollLeft / galleryTrack.offsetWidth);
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+  }, { passive: true });
+
+  // Dots click navigation
+  dots.forEach((dot, idx) => {
+    dot.addEventListener('click', () => {
+      galleryTrack.scrollLeft = idx * galleryTrack.offsetWidth;
+    });
+  });
+}
 
 /* ════════════════════════════════════════
    CART — state, render, open/close
@@ -212,10 +269,12 @@ function renderCart() {
     const line = c.price * (parseFloat(c.w) || 1) * c.qty;
     return `
       <div class="cart-row">
-        <div>
+        <div class="cart-row-item">
           <img src="${c.img}" alt="${c.name}" class="cart-img"/>
-  ${c.name}
-          <div class="cart-row-detail">${c.w} × ${fmt(c.price)}/kg</div>
+          <div class="cart-row-meta">
+            <div class="cart-row-name">${c.name}</div>
+            <div class="cart-row-detail">${c.w} × ${fmt(c.price)}/kg</div>
+          </div>
         </div>
         <div class="qty-ctrl">
   <button class="qb minus" data-key="${c.key}" data-a="m">−</button>
@@ -317,3 +376,59 @@ if (commentForm) {
 }
 
 });
+// YOUTUBE-LITE — lazy YouTube thumbnails -> render iframe on click
+const initYouTubeLite = () => {
+  const items = document.querySelectorAll('.youtube-lite');
+  if (!items || !items.length) return;
+
+  items.forEach(el => {
+    const id = el.dataset.id || el.getAttribute('data-id');
+    if (!id) return;
+
+    const thumb = document.createElement('img');
+    thumb.decoding = 'async';
+    thumb.loading = 'lazy';
+    thumb.className = 'youtube-thumb';
+    thumb.alt = 'YouTube thumbnail';
+    thumb.src = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+
+    const play = document.createElement('button');
+    play.type = 'button';
+    play.className = 'youtube-play';
+    play.setAttribute('aria-label', 'Putar video');
+    play.innerHTML = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>';
+
+    el.innerHTML = '';
+    el.appendChild(thumb);
+    el.appendChild(play);
+
+    const renderIframe = () => {
+      if (el.dataset.rendered) return;
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1`;
+      iframe.setAttribute('frameborder', '0');
+      iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; compute-pressure');
+      iframe.setAttribute('allowfullscreen', '');
+      iframe.width = '100%';
+      iframe.height = '100%';
+      el.innerHTML = '';
+      el.appendChild(iframe);
+      el.dataset.rendered = '1';
+    };
+
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      renderIframe();
+    }, { once: true });
+
+    el.setAttribute('tabindex', '0');
+    el.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        ev.preventDefault();
+        renderIframe();
+      }
+    });
+  });
+};
+
+initYouTubeLite();

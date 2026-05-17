@@ -19,7 +19,19 @@ const {
     href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥩</text></svg>"
   />
 </head>
-<body>
+<body class="splash-active">
+  <div id="splash-screen" class="splash-screen" aria-hidden="true">
+    <div class="splash-content">
+      <div class="splash-logo">
+        <img src="/logo.png" alt="Lembu Lemu" class="splash-logo-img" />
+      </div>
+      <div class="splash-text">
+        <strong>Lembu Lemu</strong>
+        <small>Daging Segar Premium</small>
+      </div>
+    </div>
+  </div>
+
   <slot />
 </body>
 </html>
