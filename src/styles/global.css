@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,600&family=IBM+Plex+Mono:wght@400;600&family=Oswald:wght@300;400;600;700&display=swap');
-
+/* Di bagian import Google Fonts (tambahkan di <head> atau @import CSS) */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@800;900&display=swap');
 /* ════════════════════════════════════════
    VARIABLES & RESET
 ════════════════════════════════════════ */
@@ -30,6 +31,55 @@ body {
   min-height: 100vh;
 }
 
+body.splash-active {
+  overflow: hidden;
+}
+
+main > * {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+
+main > *:nth-child(1) { transition-delay: 0.12s; }
+main > *:nth-child(2) { transition-delay: 0.2s; }
+main > *:nth-child(3) { transition-delay: 0.28s; }
+main > *:nth-child(4) { transition-delay: 0.36s; }
+
+body.page-loaded main > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-text > * {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.hero-text > *:nth-child(1) { transition-delay: 0.3s; }
+.hero-text > *:nth-child(2) { transition-delay: 0.36s; }
+.hero-text > *:nth-child(3) { transition-delay: 0.42s; }
+.hero-text > *:nth-child(4) { transition-delay: 0.48s; }
+
+body.page-loaded .hero-text > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+body.page-loaded .hero-3d-wrap,
+body.page-loaded .hero-stats {
+  opacity: 1;
+  transform: none;
+}
+
+.hero-3d-wrap,
+.hero-stats {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
 #splash-screen {
   position: fixed;
   inset: 0;
@@ -37,12 +87,21 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--ink);
+  background: linear-gradient(180deg, rgba(3, 3, 3, 0.85), rgba(8, 8, 8, 0.5)), url('/luogo.jpeg') center/cover no-repeat;
   color: var(--cream);
   pointer-events: all;
   opacity: 1;
   visibility: visible;
   transition: opacity 0.45s ease, visibility 0.45s ease;
+}
+
+#splash-screen::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(255,255,255,0.08), transparent 24%),
+              radial-gradient(circle at bottom right, rgba(255,255,255,0.05), transparent 30%);
+  pointer-events: none;
 }
 
 #splash-screen.hidden {
@@ -52,38 +111,53 @@ body {
 }
 
 .splash-content {
+  position: relative;
+  z-index: 1;
   text-align: center;
   animation: splashPop 0.8s ease-out both;
+  padding: 2rem;
+  border-radius: 32px;
+  background: rgba(10, 10, 10, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(14px);
+}
+
+.splash-content::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255,255,255,0.1), transparent 65%);
+  opacity: 0.4;
+  pointer-events: none;
 }
 
 .splash-logo {
-  margin-bottom: 1rem;
+  margin-bottom: 0;
+  max-width: min(320px, 90vw);
 }
 
 .splash-logo-img {
-  width: 84px;
-  height: 84px;
+  width: min(240px, 80vw);
+  height: min(240px, 80vw);
   display: inline-block;
-  object-fit: contain;
-  border-radius: 12px;
-  background: var(--white);
-  padding: 6px;
-  box-shadow: 0 8px 28px rgba(0,0,0,0.45);
+  object-fit: cover;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
 }
 
-.splash-text {
-  font-size: 1.1rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-
-.splash-text small {
-  display: block;
-  margin-top: 0.45rem;
-  font-size: 0.85rem;
-  color: rgba(250, 246, 238, 0.75);
-  letter-spacing: 0.08em;
-  text-transform: none;
+@keyframes splashIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 @keyframes splashPop {
@@ -364,7 +438,7 @@ body {
 }
 .hero-eyebrow::before { content: ''; width: 1.5rem; height: 1px; background: var(--red); }
 .hero-h1 {
-  font-family: 'Abril Fatface', serif;
+  font-family: 'Nunito', sans-serif;
   font-size: clamp(3.5rem, 8vw, 7rem);
   line-height: 0.88;
   letter-spacing: -0.02em;
@@ -486,7 +560,7 @@ body {
   opacity: 1;
 }
 .hero-stat-n {
-  font-family: 'Abril Fatface', serif;
+  font-family: 'Nunito', sans-serif;
   font-size: 2.2rem;
 
   color: var(--bone);
@@ -632,7 +706,7 @@ body {
 }
 
 .gallery-title {
-  font-family: 'Abril Fatface', serif;
+  font-family: 'Nunito', sans-serif;
   font-size: clamp(2.8rem, 5vw, 4.5rem);
   color: var(--bone);
   line-height: 0.95;
@@ -808,7 +882,7 @@ body {
   gap: 1rem;
 }
 .gallery-strip-title {
-  font-family: 'Abril Fatface', serif;
+  font-family: 'Nunito', sans-serif;
   font-size: clamp(2rem, 4vw, 3.2rem);
   color: var(--bone);
   line-height: 0.95;
@@ -818,7 +892,7 @@ body {
   right: 4rem;
   bottom: 50%;
   transform: translateY(50%);
-  font-family: 'Abril Fatface', serif;
+  font-family: 'Nunito', sans-serif;
   font-size: 6rem;
   color: rgba(255,255,255,0.04);
   line-height: 1;
@@ -855,7 +929,7 @@ body {
 }
 .section-label::after { content: ''; flex: 1; max-width: 2rem; height: 1px; background: var(--red); }
 .about-title {
-  font-family: 'Abril Fatface', serif;
+  font-family: 'Nunito', sans-serif;
   font-size: clamp(2.8rem, 5vw, 4.5rem);
   color: var(--bone); line-height: 0.95; margin-bottom: 2rem;
 }
@@ -876,7 +950,7 @@ body {
 }
 .feat-row:last-child { border-bottom: none; padding-bottom: 0; }
 .feat-num {
-  font-family: 'Abril Fatface', serif;
+  font-family: 'Nunito', sans-serif;
   font-size: 2.5rem; color: var(--red); line-height: 1;
 }
 .feat-title {
@@ -923,7 +997,7 @@ body {
 }
 
 .produk-title {
-  font-family: 'Abril Fatface', serif;
+  font-family: 'Nunito', sans-serif;
   font-size: clamp(3.5rem, 9vw, 8rem);
   line-height: 0.82;
 
@@ -1199,7 +1273,7 @@ body {
   margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem;
 }
 .layanan-title {
-  font-family: 'Abril Fatface', serif;
+  font-family: 'Nunito', sans-serif;
   font-size: clamp(2.5rem, 6vw, 5rem);
   color: var(--bone); line-height: 0.9;
 }
@@ -1241,7 +1315,7 @@ body {
 }
 .layanan-card:hover::before { transform: scaleY(1); }
 .layanan-num {
-  font-family: 'Abril Fatface', serif;
+  font-family: 'Nunito', sans-serif;
   font-size: 4rem; color: var(--red); line-height: 1;
 }
 .layanan-name {
@@ -1316,28 +1390,31 @@ body {
   align-items: center;
   justify-content: center;
 
-  width: auto;
-  height: auto;
-  padding: 0;
+  width: fit-content;
+  transition: transform 0.35s ease;
 }
 .pf-logo-img img {
-  width: clamp(90px, 10vw, 160px);
-  height: auto;
+ width: clamp(120px, 15vw, 180px);
+  height: clamp(120px, 15vw, 180px);
+  object-fit: cover;
+ border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
 
-  filter: drop-shadow(0 12px 30px rgba(0,0,0,0.4));
+  transition: box-shadow 0.35s ease;
+  display: block;
 }
 .pf-logo-big:hover .pf-logo-img {
   transform: translateY(-4px);
- 
+}
+.pf-logo-big:hover .pf-logo-img img {
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
 }
 
 .pf-logo-name {
-  font-family: 'Abril Fatface', serif;
-  font-size: 1.6rem; color: var(--bone); letter-spacing: 0.04em;
+  display: none;
 }
 .pf-logo-tagline {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic; font-size: 0.9rem; color: #666;
+  display: none;
 }
 .subscribe-form {
   display: flex; flex-direction: column; gap: 0.8rem;
@@ -1384,7 +1461,7 @@ body {
   color: var(--red); margin-bottom: 0.75rem; display: block;
 }
 .footer-h {
-  font-family: 'Abril Fatface', serif;
+  font-family: 'Nunito', sans-serif;
   font-size: 1.6rem; color: var(--bone); margin-bottom: 1.25rem; line-height: 1.1;
 }
 .comment-form { display: flex; flex-direction: column; gap: 0.6rem; }
@@ -1444,7 +1521,7 @@ body {
   flex-wrap: wrap; gap: 0.5rem;
 }
 .footer-brand-small {
-  font-family: 'Abril Fatface', serif;
+  font-family: 'Nunito', sans-serif;
   font-size: 1.2rem; color: #333; letter-spacing: 0.04em;
 }
 .footer-copy {
@@ -1733,7 +1810,7 @@ body {
   letter-spacing: 0.15em; text-transform: uppercase; color: #666;
 }
 .cart-total-amt {
-  font-family: 'Abril Fatface', serif; font-size: 1.8rem; color: var(--bone);
+  font-family: 'Nunito', sans-serif; font-size: 1.8rem; color: var(--bone);
 }
 .checkout-btn {
   width: 100%;

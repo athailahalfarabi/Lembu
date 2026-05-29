@@ -3,14 +3,20 @@
 
 const WA = '6285174440515';
 
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
+
 document.addEventListener('DOMContentLoaded', () => {
   const splash = document.getElementById('splash-screen');
 
   if (splash) {
     window.setTimeout(() => {
       splash.classList.add('hidden');
+      document.body.classList.remove('splash-active');
       document.body.classList.add('page-loaded');
-    }, 850);
+    }, 2000);
   } else {
     document.body.classList.add('page-loaded');
   }
