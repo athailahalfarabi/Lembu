@@ -1,7 +1,26 @@
-// src/scripts/main.js
-// Semua logic JavaScript: navbar, hamburger, cart, tabs, chips, scroll
-
 const WA = '6285174440515';
+const FORM_SUBMIT_EMAIL = 'akbaralfarizi886@gmail.com';
+
+const sendFormSubmit = async (payload) => {
+  const response = await fetch(`https://formsubmit.co/ajax/${FORM_SUBMIT_EMAIL}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+    body: JSON.stringify({
+      ...payload,
+      _subject: payload._subject || 'Pesan dari Lembu Lemu',
+      _captcha: 'false',
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error('Gagal mengirim pesan.');
+  }
+
+  return response.json();
+};
 
 if ('scrollRestoration' in history) {
   history.scrollRestoration = 'manual';
@@ -21,20 +40,17 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add('page-loaded');
   }
 
-  /* ════════════════════════════════════════
-     NAVBAR — Tampil saat scroll ke bawah, Hide saat scroll ke atas
-  ════════════════════════════════════════════════ */
+  
   let lastScrollY = window.scrollY;
   const navbar = document.getElementById('navbar');
 
   window.addEventListener('scroll', () => {
     const y = window.scrollY;
 
-    // Jika scroll ke bawah dan sudah melewati batas 80px -> Munculkan navbar
     if (y > lastScrollY && y > 80) {
       navbar.classList.remove('hide');
     } 
-    // Jika scroll ke atas ATAU kembali ke paling atas -> Sembunyikan navbar
+
     else if (y < lastScrollY || y <= 80) {
       navbar.classList.add('hide');
     }
@@ -43,9 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { passive: true });
 
 
-/* ════════════════════════════════════════
-   HAMBURGER — mobile nav toggle
-════════════════════════════════════════ */
+
 const hamburger = document.getElementById('hamburger-btn');
 const mobileNav = document.getElementById('mobile-nav');
 
@@ -55,7 +69,6 @@ hamburger.addEventListener('click', () => {
   hamburger.setAttribute('aria-label', isOpen ? 'Tutup menu' : 'Buka menu');
 });
 
-// Tutup mobile nav saat link diklik
 mobileNav.querySelectorAll('.nav-link').forEach(link => {
   link.addEventListener('click', () => {
     mobileNav.classList.remove('open');
@@ -65,18 +78,14 @@ mobileNav.querySelectorAll('.nav-link').forEach(link => {
 });
 
 
-/* ════════════════════════════════════════
-   LOGO — klik smooth scroll ke atas
-════════════════════════════════════════ */
+
 document.getElementById('logo-top').addEventListener('click', (e) => {
   e.preventDefault();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
 
-/* ════════════════════════════════════════
-   ACTIVE NAV LINK — IntersectionObserver
-════════════════════════════════════════ */
+
 const navLinks    = document.querySelectorAll('.nav-link');
 const sectionIds  = ['beranda', 'tentang', 'produk', 'layanan', 'kontak'];
 
@@ -99,9 +108,7 @@ sectionIds.forEach(id => {
 });
 
 
-/* ════════════════════════════════════════
-   BACK TO TOP
-════════════════════════════════════════ */
+
 const backTop = document.getElementById('back-top');
 
 window.addEventListener('scroll', () => {
@@ -113,9 +120,7 @@ backTop.addEventListener('click', () => {
 });
 
 
-/* ════════════════════════════════════════
-   WEIGHT CHIPS
-════════════════════════════════════════ */
+
 const selectedWeights = {};
 
 const formatPrice = (value) => {
@@ -143,7 +148,6 @@ document.querySelectorAll('.chips').forEach(group => {
     if (selected) updatePriceTag(selected);
   };
 
-  // Ambil default yang sudah diberi class .sel di HTML
   chips.forEach(chip => {
     if (chip.classList.contains('sel')) {
       selectedWeights[iid] = chip.dataset.w;
@@ -157,7 +161,6 @@ document.querySelectorAll('.chips').forEach(group => {
     });
   });
 
-  // Fallback: jika tidak ada default, pakai index 1
   if (!selectedWeights[iid] && chips.length > 1) {
     selectedWeights[iid] = chips[1].dataset.w;
     chips[1].classList.add('sel');
@@ -168,9 +171,7 @@ document.querySelectorAll('.chips').forEach(group => {
 });
 
 
-/* ════════════════════════════════════════
-   CATEGORY TABS
-════════════════════════════════════════ */
+
 document.querySelectorAll('.cat-tab').forEach(tab => {
   tab.addEventListener('click', () => {
     document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
@@ -183,7 +184,6 @@ document.querySelectorAll('.cat-tab').forEach(tab => {
   });
 });
 
-// Initialize active tab on page load
 document.addEventListener('DOMContentLoaded', () => {
   const activeTab = document.querySelector('.cat-tab.active');
   if (activeTab) {
@@ -197,14 +197,12 @@ document.addEventListener('DOMContentLoaded', () => {
 const galleryTrack = document.querySelector('.gallery-mobile-track');
 if (galleryTrack) {
   const dots = document.querySelectorAll('.gallery-dot');
-  
-  // Simple scroll listener untuk dots
+
   galleryTrack.addEventListener('scroll', () => {
     const idx = Math.round(galleryTrack.scrollLeft / galleryTrack.offsetWidth);
     dots.forEach((d, i) => d.classList.toggle('active', i === idx));
   }, { passive: true });
 
-  // Dots click navigation
   dots.forEach((dot, idx) => {
     dot.addEventListener('click', () => {
       galleryTrack.scrollLeft = idx * galleryTrack.offsetWidth;
@@ -212,14 +210,11 @@ if (galleryTrack) {
   });
 }
 
-/* ════════════════════════════════════════
-   CART — state, render, open/close
-════════════════════════════════════════ */
+
 let cart = [];
 
 const fmt = (n) => 'Rp ' + n.toLocaleString('id-ID');
 
-// ADD TO CART
 document.querySelectorAll('.add-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const id    = btn.dataset.id;
@@ -248,7 +243,6 @@ document.querySelectorAll('.add-btn').forEach(btn => {
   });
 });
 
-// RENDER CART
 function renderCart() {
   const body      = document.getElementById('cart-items');
   const countEl   = document.getElementById('cart-count');
@@ -293,7 +287,6 @@ function renderCart() {
       </div>`;
   }).join('');
 
-  // Qty buttons
   body.querySelectorAll('.qb').forEach(b => {
     b.addEventListener('click', () => {
       const k = b.dataset.key;
@@ -311,7 +304,6 @@ function renderCart() {
   });
 }
 
-// OPEN / CLOSE
 function openCart() {
   document.getElementById('cart-sidebar').classList.add('open');
   document.getElementById('cart-overlay').classList.add('open');
@@ -327,7 +319,6 @@ document.getElementById('cart-open-btn').addEventListener('click', openCart);
 document.getElementById('cart-close-btn').addEventListener('click', closeCart);
 document.getElementById('cart-overlay').addEventListener('click', closeCart);
 
-// CHECKOUT — kirim ke WhatsApp
 document.getElementById('checkout-btn').addEventListener('click', () => {
   if (!cart.length) return;
 
@@ -350,26 +341,36 @@ document.getElementById('checkout-btn').addEventListener('click', () => {
 });
 
 
-/* ════════════════════════════════════════
-   SUBSCRIBE FORM
-════════════════════════════════════════ */
-const subscribeBtn = document.getElementById('subscribe-btn');
-if (subscribeBtn) {
-  subscribeBtn.addEventListener('click', () => {
+
+const subscribeForm = document.getElementById('subscribe-form');
+if (subscribeForm) {
+  subscribeForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
     const input = document.getElementById('subscribe-email');
-    if (!input || !input.value) { input?.focus(); return; }
-    alert(`Terima kasih! Email ${input.value} berhasil didaftarkan.`);
-    input.value = '';
+    if (!input || !input.value.trim()) {
+      input?.focus();
+      return;
+    }
+
+    try {
+      await sendFormSubmit({
+        email: input.value.trim(),
+        message: 'Permintaan langganan promo / update dari website Lembu Lemu.',
+        _subject: 'Langganan Lembu Lemu',
+      });
+      alert(`Terima kasih! Email ${input.value.trim()} berhasil didaftarkan.`);
+      subscribeForm.reset();
+    } catch (error) {
+      alert('Maaf, pengiriman email gagal. Silakan coba lagi.');
+    }
   });
 }
 
 
-/* ════════════════════════════════════════
-   COMMENT FORM
-════════════════════════════════════════ */
+
 const commentForm = document.getElementById('comment-form');
 if (commentForm) {
-  commentForm.addEventListener('submit', (e) => {
+  commentForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const name    = document.getElementById('comment-name')?.value    || '';
     const email   = document.getElementById('comment-email')?.value   || '';
@@ -378,13 +379,24 @@ if (commentForm) {
       alert('Mohon isi semua kolom terlebih dahulu.');
       return;
     }
-    alert(`Terima kasih, ${name}! Pesan Anda sudah kami terima.`);
-    commentForm.reset();
+
+    try {
+      await sendFormSubmit({
+        name,
+        email,
+        message,
+        _subject: `Pesan dari ${name}`,
+      });
+      alert(`Terima kasih, ${name}! Pesan Anda sudah kami terima.`);
+      commentForm.reset();
+    } catch (error) {
+      alert('Maaf, pengiriman pesan gagal. Silakan coba lagi.');
+    }
   });
 }
 
 });
-// YOUTUBE-LITE — lazy YouTube thumbnails -> render iframe on click
+
 const initYouTubeLite = () => {
   const items = document.querySelectorAll('.youtube-lite');
   if (!items || !items.length) return;
@@ -393,7 +405,6 @@ const initYouTubeLite = () => {
     const id = el.dataset.id || el.getAttribute('data-id');
     if (!id) return;
 
-    // build thumbnail + play button
     const thumb = document.createElement('img');
     thumb.decoding = 'async';
     thumb.loading = 'lazy';
@@ -407,7 +418,6 @@ const initYouTubeLite = () => {
     play.setAttribute('aria-label', 'Putar video');
     play.innerHTML = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>';
 
-    // clear existing and append
     el.innerHTML = '';
     el.appendChild(thumb);
     el.appendChild(play);
@@ -426,12 +436,11 @@ const initYouTubeLite = () => {
       el.dataset.rendered = '1';
     };
 
-    // use pointer/click to render; once only
     el.addEventListener('click', (e) => {
       e.preventDefault();
       renderIframe();
     }, { once: true });
-    // also allow keyboard activation
+
     el.setAttribute('tabindex', '0');
     el.addEventListener('keydown', (ev) => {
       if (ev.key === 'Enter' || ev.key === ' ') {
@@ -442,5 +451,4 @@ const initYouTubeLite = () => {
   });
 };
 
-// initialize after DOM ready
 initYouTubeLite();

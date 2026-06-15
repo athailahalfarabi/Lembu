@@ -1,11 +1,17 @@
 ---
+import Seo from '../components/Seo.astro';
+
 interface Props {
   title?: string;
   description?: string;
+  url?: string;
+  image?: string;
 }
 const {
   title       = 'Lembu Lemu — Daging Segar Premium',
   description = 'Pemotongan daging kambing & sapi segar, halal bersertifikat, langsung dari tangan ahlinya. Meteseh, Semarang.',
+  url         = 'https://lembu-five.vercel.app/',
+  image       = 'https://lembu-five.vercel.app/luogo.jpeg',
 } = Astro.props;
 ---
 <!DOCTYPE html>
@@ -13,11 +19,14 @@ const {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content={description} />
   <title>{title}</title>
-  <link rel="icon" type="image/svg+xml"
-    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥩</text></svg>"
+  <Seo
+    title={title}
+    description={description}
+    url={url}
+    image={image}
   />
+  <link rel="icon" href="/logo.png" type="image/png" />
   <style>
     body {
       margin: 0;

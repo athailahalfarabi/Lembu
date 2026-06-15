@@ -1,0 +1,58 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  url: string;
+  image: string;
+  type?: string;
+  siteName?: string;
+  locale?: string;
+  keywords?: string;
+}
+const {
+  title,
+  description,
+  url,
+  image,
+  type = 'website',
+  siteName = 'Lembu Lemu',
+  locale = 'id_ID',
+  keywords = 'daging segar, pemotongan daging halal, kambing, sapi, Semarang, jasa daging premium',
+} = Astro.props;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: siteName,
+  description,
+  image,
+  url,
+  telephone: '+6285174440515',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Semarang',
+    addressRegion: 'Jawa Tengah',
+  },
+  sameAs: ['https://wa.me/6285174440515'],
+};
+---
+  <meta name="description" content={description} />
+  <meta name="keywords" content={keywords} />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href={url} />
+
+  <meta property="og:type" content={type} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={url} />
+  <meta property="og:image" content={image} />
+  <meta property="og:site_name" content={siteName} />
+  <meta property="og:locale" content={locale} />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={image} />
+
+  <script type="application/ld+json">
+    {JSON.stringify(jsonLd)}
+  </script>

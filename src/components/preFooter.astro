@@ -40,7 +40,7 @@
 
   <!-- Kanan: subscribe email -->
   <div class="pf-col">
-    <div class="subscribe-form">
+    <form class="subscribe-form" id="subscribe-form" novalidate>
       <div class="subscribe-title">Berlangganan</div>
       <div class="subscribe-desc">
         Dapatkan info harga terbaru, promo, dan ketersediaan stok
@@ -50,11 +50,13 @@
         type="email"
         class="subscribe-input"
         id="subscribe-email"
+        name="email"
         placeholder="email@anda.com"
         aria-label="Alamat email"
+        required
       />
-      <button class="subscribe-btn" id="subscribe-btn">Daftar Sekarang</button>
-    </div>
+      <button type="submit" class="subscribe-btn" id="subscribe-btn">Daftar Sekarang</button>
+    </form>
   </div>
 
 </div>
