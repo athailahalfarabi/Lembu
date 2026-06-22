@@ -53,6 +53,4 @@ const jsonLd = {
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={image} />
 
-  <script type="application/ld+json">
-    {JSON.stringify(jsonLd)}
-  </script>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
