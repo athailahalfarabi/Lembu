@@ -43,6 +43,15 @@ document.addEventListener('DOMContentLoaded', () => {
   
   let lastScrollY = window.scrollY;
   const navbar = document.getElementById('navbar');
+  const hamburger = document.getElementById('hamburger-btn');
+  const mobileNav = document.getElementById('mobile-nav');
+
+  const closeMobileNav = () => {
+    if (!mobileNav || !hamburger) return;
+    mobileNav.classList.remove('open');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-label', 'Buka menu');
+  };
 
   window.addEventListener('scroll', () => {
     const y = window.scrollY;
@@ -53,15 +62,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     else if (y < lastScrollY || y <= 80) {
       navbar.classList.add('hide');
+      closeMobileNav();
     }
     
     lastScrollY = y;
   }, { passive: true });
 
-
-
-const hamburger = document.getElementById('hamburger-btn');
-const mobileNav = document.getElementById('mobile-nav');
 
 hamburger.addEventListener('click', () => {
   const isOpen = mobileNav.classList.toggle('open');
