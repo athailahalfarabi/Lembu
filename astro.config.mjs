@@ -5,5 +5,5 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://lembu-five.vercel.app',
   trailingSlash: 'never',
-  integrations: [sitemap()],
+  integrations: [],
 });
