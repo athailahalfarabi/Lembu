@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://lembu-five.vercel.app/sitemap.xml
+Sitemap: https://lembu-five.vercel.app/sitemapp.xml
